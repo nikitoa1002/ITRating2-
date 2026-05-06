@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="shortcut icon" href="../images/Logoo.svg" type="image/x-icon">
+    <title>Обратная связь / Архитектурные жемчужины Витебска</title>
+    <script src="../js/wow.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+</head>
+
+<body>
+    <a class="skip-link" href="#feedback-main">Перейти к содержимому</a>
+
+    <main id="feedback-main">
+        <div class="feedback-container">
+            <section class="feedback-section" aria-labelledby="feedback-heading">
+                <div class="feedback-panel">
+                    <div class="panel-header">
+                        <a href="../index.html" aria-label="Архитектурные жемчужины Витебска — на главную">
+                            <img src="../images/Nav-Logo.svg" alt="" id="Logo">
+                        </a>
+                        <a href="../index.html" class="back-link">Назад</a>
+                    </div>
+                    <h1 id="feedback-heading">Связаться с нами</h1>
+                    <br>
+
+                    <form id="feedback-form" class="form-block" novalidate>
+                        <div class="form-field">
+                            <label for="field-name">Ваше имя <span aria-hidden="true">*</span><span
+                                    class="visually-hidden">(обязательное поле)</span></label>
+                            <input type="text" name="name" id="field-name" required minlength="2"
+                                placeholder="Введите имя" autocomplete="name">
+                        </div>
+
+                        <div class="form-field">
+                            <label for="field-email">Email <span aria-hidden="true">*</span><span
+                                    class="visually-hidden">(обязательное поле)</span></label>
+                            <input type="email" name="email" id="field-email" required placeholder="example@mail.com"
+                                autocomplete="email">
+                        </div>
+
+                        <div class="form-field">
+                            <label for="field-phone">Телефон</label>
+                            <input type="tel" name="phone" id="field-phone" placeholder="+375 (__) ___‑__‑__"
+                                autocomplete="tel" aria-describedby="phone-hint">
+                            <span id="phone-hint" class="visually-hidden">Формат: +375 (29) 123-45-67</span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="field-message">Сообщение <span aria-hidden="true">*</span><span
+                                    class="visually-hidden">(обязательное поле)</span></label>
+                            <textarea name="message" id="field-message" required minlength="5"
+                                placeholder="Ваш вопрос или запрос на экскурсию"></textarea>
+                        </div>
+
+                        <button type="submit" class="form-submit">Отправить</button>
+                    </form>
+                </div>
+
+                <div class="feedback-info">
+                    <h2>Мы всегда на связи</h2>
+                    <br>
+                    <p>Задайте вопрос, уточните детали экскурсии или оставьте заявку — мы ответим вам в ближайшее время.
+                    </p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("feedback-form");
+            const fields = form.querySelectorAll("input, textarea");
+
+            const phoneField = document.getElementById("field-phone");
+            phoneField.addEventListener("input", onPhoneInput);
+            phoneField.addEventListener("focus", onPhoneFocus);
+            phoneField.addEventListener("blur", onPhoneBlur);
+
+            function onPhoneInput(e) {
+                let value = e.target.value.replace(/\D/g, "");
+                if (!value.startsWith("375")) value = "375" + value;
+                value = value.slice(0, 12);
+                let formatted = "+375 ";
+                if (value.length > 3) formatted += "(" + value.slice(3, 5);
+                else formatted += "(";
+                if (value.length >= 5) formatted += ") ";
+                if (value.length >= 5) formatted += value.slice(5, 8);
+                if (value.length >= 8) formatted += "-" + value.slice(8, 10);
+                if (value.length >= 10) formatted += "-" + value.slice(10, 12);
+                e.target.value = formatted;
+            }
+
+            function onPhoneFocus(e) {
+                if (e.target.value === "") e.target.value = "+375 (";
+            }
+
+            function onPhoneBlur(e) {
+                if (e.target.value === "+375 (" || e.target.value === "+375 ()") e.target.value = "";
+            }
+
+            fields.forEach(field => {
+                const errorId = `error-${field.id || field.name}`;
+                const error = document.createElement("div");
+                error.className = "input-error";
+                error.id = errorId;
+                error.setAttribute("role", "alert");
+                error.setAttribute("aria-live", "polite");
+                error.style.cssText = "color:#d9534f; font-size:14px; margin-top:4px; display:none;";
+                field.parentNode.appendChild(error);
+                field.setAttribute("aria-describedby", (field.getAttribute("aria-describedby") || "") + " " + errorId);
+
+                field.addEventListener("input", () => {
+                    error.style.display = "none";
+                    error.textContent = "";
+                    field.removeAttribute("aria-invalid");
+                });
+            });
+
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const phonePattern = /^\+375\s?\((25|29|33|44)\)\s?\d{3}-\d{2}-\d{2}$/;
+
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                let valid = true;
+                let firstInvalid = null;
+
+                const nameField = document.getElementById("field-name");
+                const emailField = document.getElementById("field-email");
+                const messageField = document.getElementById("field-message");
+
+                if (nameField.value.trim().length < 2) {
+                    showError(nameField, "Имя должно содержать минимум 2 символа.");
+                    nameField.setAttribute('aria-invalid', 'true');
+                    valid = false;
+                    if (!firstInvalid) firstInvalid = nameField;
+                } else {
+                    nameField.removeAttribute('aria-invalid');
+                }
+
+                if (!emailPattern.test(emailField.value.trim())) {
+                    showError(emailField, "Введите корректный email.");
+                    emailField.setAttribute('aria-invalid', 'true');
+                    valid = false;
+                    if (!firstInvalid) firstInvalid = emailField;
+                } else {
+                    emailField.removeAttribute('aria-invalid');
+                }
+
+                if (phoneField.value.trim() && !phonePattern.test(phoneField.value.trim())) {
+                    showError(phoneField, "Введите номер в формате: +375 (29) 123-45-67");
+                    phoneField.setAttribute('aria-invalid', 'true');
+                    valid = false;
+                    if (!firstInvalid) firstInvalid = phoneField;
+                } else {
+                    phoneField.removeAttribute('aria-invalid');
+                }
+
+                if (messageField.value.trim().length < 5) {
+                    showError(messageField, "Сообщение должно содержать минимум 5 символов.");
+                    messageField.setAttribute('aria-invalid', 'true');
+                    valid = false;
+                    if (!firstInvalid) firstInvalid = messageField;
+                } else {
+                    messageField.removeAttribute('aria-invalid');
+                }
+
+                if (!valid) {
+                    if (firstInvalid) firstInvalid.focus();
+                    return;
+                }
+
+                const token = "8475014397:AAGob42RaxqJkhgPXu4vP3254ioHJd7565g";
+                const chat_id = "7789506191";
+                const text = "📩 Новая заявка\n" +
+                    "👤 Имя: " + nameField.value + "\n" +
+                    "📧 Email: " + emailField.value + "\n" +
+                    "📱 Телефон: " + phoneField.value + "\n" +
+                    "💬 Сообщение:\n" + messageField.value;
+
+                const submitBtn = form.querySelector('.form-submit');
+                submitBtn.disabled = true;
+                submitBtn.setAttribute('aria-busy', 'true');
+                submitBtn.textContent = 'Отправка...';
+
+                fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ chat_id: chat_id, text: text })
+                })
+                    .then(() => {
+                        alert("Сообщение отправлено! Мы скоро свяжемся с вами.");
+                        form.reset();
+                        fields.forEach(f => f.removeAttribute('aria-invalid'));
+                        submitBtn.disabled = false;
+                        submitBtn.removeAttribute('aria-busy');
+                        submitBtn.textContent = 'Отправить';
+                    })
+                    .catch(() => {
+                        alert("Ошибка отправки. Попробуйте позже.");
+                        submitBtn.disabled = false;
+                        submitBtn.removeAttribute('aria-busy');
+                        submitBtn.textContent = 'Отправить';
+                    });
+            });
+
+            function showError(field, message) {
+                const errorId = `error-${field.id || field.name}`;
+                const error = field.parentNode.querySelector(`#${errorId}`);
+                if (error) {
+                    error.textContent = message;
+                    error.style.display = "block";
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

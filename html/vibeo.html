@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru" id="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="shortcut icon" href="../images/Logoo.svg" type="image/x-icon">
+    <link rel="stylesheet" href="../media.css">
+    <title>Архитектурные жемчужины Витебска / Видео</title>
+    <script src="../js/wow.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+</head>
+
+<body>
+
+    <a class="skip-link" href="#videos-main">Перейти к содержимому</a>
+
+    <a class="a_btn" href="#ar" aria-label="Прокрутить наверх">
+        <img src="../images/стрелочка.AVIF" alt="" aria-hidden="true">
+    </a>
+
+    <header class="container">
+        <nav class="nav">
+            <div class="nav-left">
+                <a href="../index.html"><img src="../images/Nav-Logo.svg" alt="лого" class="logo"></a>
+                <div class="nav-links">
+                    <a href="./galerez.html" class="header__link">Галерея</a>
+                    <a href="./vibeo.html" class="header__link active">Видео</a>
+                    <a href="quiz.html" class="header__link">Викторина</a>
+                    <a href="pazl.html" class="header__link">Пазл</a>
+                </div>
+            </div>
+            <div class="nav-right" id="nav-right">
+                <div class="input nav-input">
+                    <img src="../images/search.svg" alt="search">
+                    <input type="text" placeholder="Поиск" class="input-in" id="videoSearch">
+                </div>
+                <a href="./feedback.html" class="btn wallet">Обратная связь</a>
+            </div>
+            <img src="../images/burger-menu-svgrepo-com.svg" alt="меню" class="menu" id="menu">
+
+            <aside class="side-menu" id="sideMenu">
+                <button class="side-menu-close" id="sideMenuClose" aria-label="Закрыть меню">✕</button>
+                <nav class="side-nav">
+                    <a href="../index.html" class="header__link">Главная</a>
+                    <a href="galerez.html" class="header__link">Галерея</a>
+                    <a href="vibeo.html" class="header__link">Видео</a>
+                    <a href="quiz.html" class="header__link">Викторина</a>
+                    <a href="pazl.html" class="header__link">Пазл</a>
+                    <a href="feedback.html" class="header__link">Обратная связь</a>
+                </nav>
+            </aside>
+        </nav>
+    </header>
+
+    <main id="videos-main">
+        <section class="videos-section" aria-labelledby="videos-heading">
+            <h1 class="videos-title wow animate__animated animate__fadeInDown" id="videos-heading">Видео об архитектуре
+                Витебска</h1>
+
+            <div class="videos-grid" id="videosGrid" role="list" aria-live="polite" aria-label="Список видео"></div>
+
+            <div id="videoModal" class="video-modal" role="dialog" aria-modal="true" aria-labelledby="videoModalTitle"
+                aria-hidden="true">
+                <div class="video-modal-content">
+                    <button class="video-close" aria-label="Закрыть видео">&times;</button>
+                    <div class="video-container">
+                        <iframe id="videoPlayer" width="560" height="500" src="about:blank" title="Видеоплеер YouTube"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen aria-label="Видео"></iframe>
+                    </div>
+                    <div class="video-details">
+                        <h2 id="videoModalTitle">Название видео</h2>
+                        <p id="videoModalDescription">Описание видео</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="m-w" aria-label="Нижний колонтитул">
+        <div class="unit">
+            <a href="../index.html" aria-label="Архитектурные жемчужины Витебска — на главную">
+                <div id="logo">
+                    <img src="../images/footer-logo.svg" alt="" aria-hidden="true">
+                    <h3>Архитектурные жемчужины Витебска</h3>
+                </div>
+            </a>
+            <nav id="footer-menu" aria-label="Ссылки в подвале">
+                <ul id="footer-links">
+                    <li><a href="#footer-links">Privacy policy</a></li>
+                    <li><a href="#footer-links">Terms &amp; Conditions</a></li>
+                    <li><a href="https://www.instagram.com/nikitoa1002?igsh=eXZrejM0aW5kdmM4" target="_blank"
+                            rel="noopener noreferrer">About Us</a></li>
+                    <li><a href="./feedback.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <hr class="hr" aria-hidden="true">
+        <div class="lower">
+            <p>© 2026 made by team Nikita Toforov.</p>
+        </div>
+    </footer>
+
+    <script src="../js/media.js"></script>
+    <script src="../js/youtube.js"></script>
+</body>
+
+</html>

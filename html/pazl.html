@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ru" id="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Архитектурные жемчужины Витебска / Пазл</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../media.css">
+    <link rel="stylesheet" href="puzzle.css">
+    <link rel="shortcut icon" href="../images/Logoo.svg" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="../js/wow.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+</head>
+
+<body>
+
+    <a class="skip-link" href="#main-content">Перейти к содержимому</a>
+
+    <a class="a_btn" href="#ar" aria-label="Прокрутить наверх">
+        <img src="../images/стрелочка.AVIF" alt="" aria-hidden="true">
+    </a>
+
+    <header class="container">
+        <nav class="nav">
+            <div class="nav-left">
+                <a href="../index.html"><img src="../images/Nav-Logo.svg" alt="лого" class="logo"></a>
+                <div class="nav-links">
+                    <a href="galerez.html" class="header__link">Галерея</a>
+                    <a href="vibeo.html" class="header__link">Видео</a>
+                    <a href="quiz.html" class="header__link">Викторина</a>
+                    <a href="pazl.html" class="header__link active">Пазл</a>
+                </div>
+            </div>
+            <div class="nav-right" id="nav-right">
+                <div class="input nav-input">
+                    <img src="../images/search.svg" alt="search">
+                    <input type="text" placeholder="Поиск" class="input-in" id="videoSearch">
+                </div>
+                <a href="feedback.html" class="btn wallet">Обратная связь</a>
+            </div>
+            <img src="../images/burger-menu-svgrepo-com.svg" alt="меню" class="menu" id="menu">
+            <aside class="side-menu" id="sideMenu">
+                <button class="side-menu-close" id="sideMenuClose" aria-label="Закрыть меню">✕</button>
+                <nav class="side-nav">
+                    <a href="../index.html" class="header__link">Главная</a>
+                    <a href="galerez.html" class="header__link">Галерея</a>
+                    <a href="vibeo.html" class="header__link">Видео</a>
+                    <a href="quiz.html" class="header__link">Викторина</a>
+                    <a href="pazl.html" class="header__link">Пазл</a>
+                    <a href="feedback.html" class="header__link">Обратная связь</a>
+                </nav>
+            </aside>
+        </nav>
+    </header>
+
+    <main id="main-content" class="puzzle-main">
+        <div class="center">
+            <h1 class="puzzle-title wow animate__animated animate__fadeInDown">Собери архитектурный пазл</h1>
+            <p class="puzzle-desc wow animate__animated animate__fadeInUp" data-wow-delay="0.2s">Перетащи кусочки на
+                правильные места</p>
+        </div>
+
+        <div class="puzzle-container wow animate__animated animate__fadeIn" data-wow-delay="0.4s">
+            <div class="puzzle-board" id="puzzleBoard" role="region" aria-label="Игровое поле пазла"></div>
+            <div class="puzzle-pieces" id="puzzlePieces" role="region" aria-label="Кусочки пазла"></div>
+        </div>
+
+        <button id="shuffleBtn" class="puzzle-btn wow animate__animated animate__fadeInUp" data-wow-delay="0.6s"
+            aria-label="Перемешать кусочки пазла">Перемешать</button>
+        <div id="puzzleMessage" class="puzzle-message wow animate__animated animate__fadeIn" data-wow-delay="0.8s"
+            aria-live="polite"></div>
+    </main>
+
+    <footer class="m-w" aria-label="Нижний колонтитул">
+        <div class="unit">
+            <a href="../index.html" aria-label="Архитектурные жемчужины Витебска — на главную">
+                <div id="logo">
+                    <img src="../images/footer-logo.svg" alt="" aria-hidden="true">
+                    <h3>Архитектурные жемчужины Витебска</h3>
+                </div>
+            </a>
+            <nav id="footer-menu" aria-label="Ссылки в подвале">
+                <ul id="footer-links">
+                    <li><a href="#footer-links">Privacy policy</a></li>
+                    <li><a href="#footer-links">Terms &amp; Conditions</a></li>
+                    <li><a href="https://www.instagram.com/nikitoa1002?igsh=eXZrejM0aW5kdmM4" target="_blank"
+                            rel="noopener noreferrer">About Us</a></li>
+                    <li><a href="./feedback.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <hr class="hr" aria-hidden="true">
+        <div class="lower">
+            <p>© 2026 made by team Nikita Toforov.</p>
+        </div>
+    </footer>
+
+    <script src="../js/media.js"></script>
+    <script>
+        (function () {
+            const levels = [
+                { url: '../images/landing_right.AVIF', name: 'Памятник Отечественной войне 1812 г.' },
+                { url: 'https://avatars.mds.yandex.net/get-altay/223006/2a0000015b2ec1ed9e08628e642873956319/L_height', name: 'Духовской круглик' },
+                { url: '../images/ratusha.AVIF', name: 'Витебская ратуша' },
+                { url: '../images/Вид_на_Воскресенскую_церковь_с_Октябрьского_моста.AVIF', name: 'Воскресенская церковь' }
+            ];
+            let currentLevel = 0;
+            const totalLevels = levels.length;
+
+            const board = document.getElementById('puzzleBoard');
+            const piecesContainer = document.getElementById('puzzlePieces');
+            const messageDiv = document.getElementById('puzzleMessage');
+            const shuffleBtn = document.getElementById('shuffleBtn');
+
+            const size = 2;
+            const totalPieces = size * size;
+
+            let pieces = [];
+            let currentPiece = null;
+            let clone = null;
+
+            function createPuzzle() {
+                board.innerHTML = '';
+                piecesContainer.innerHTML = '';
+                pieces = [];
+                messageDiv.innerHTML = '';
+
+                for (let i = 0; i < totalPieces; i++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'puzzle-cell';
+                    cell.dataset.index = i;
+                    cell.setAttribute('aria-label', 'Ячейка ' + (i + 1));
+                    board.appendChild(cell);
+                }
+
+                const imageUrl = levels[currentLevel].url;
+
+                for (let i = 0; i < totalPieces; i++) {
+                    const piece = document.createElement('div');
+                    piece.className = 'puzzle-piece';
+                    piece.dataset.index = i;
+                    piece.setAttribute('aria-label', 'Кусочек пазла ' + (i + 1));
+                    piece.setAttribute('role', 'img');
+                    piece.style.backgroundImage = `url(${imageUrl})`;
+                    piece.style.backgroundSize = `${size * 100}% ${size * 100}%`;
+
+                    const row = Math.floor(i / size);
+                    const col = i % size;
+                    const posX = col === 0 ? '0%' : '100%';
+                    const posY = row === 0 ? '0%' : '100%';
+                    piece.style.backgroundPosition = `${posX} ${posY}`;
+
+                    pieces.push(piece);
+                }
+
+                shufflePieces();
+            }
+
+            function shufflePieces() {
+                const shuffled = [...pieces].sort(() => Math.random() - 0.5);
+                piecesContainer.innerHTML = '';
+                shuffled.forEach(p => piecesContainer.appendChild(p));
+                messageDiv.innerHTML = '';
+            }
+
+            function resetAndShuffle() {
+                document.querySelectorAll('.puzzle-cell .puzzle-piece').forEach(p => {
+                    piecesContainer.appendChild(p);
+                });
+                shufflePieces();
+            }
+
+            function initDragAndDrop() {
+                document.addEventListener('pointerdown', function (e) {
+                    const piece = e.target.closest('.puzzle-piece');
+                    if (!piece) return;
+
+                    e.preventDefault();
+                    currentPiece = piece;
+                    piece.style.opacity = '0.4';
+
+                    clone = piece.cloneNode(true);
+                    clone.classList.add('dragging-clone');
+                    clone.style.position = 'fixed';
+                    clone.style.zIndex = '1000';
+                    clone.style.pointerEvents = 'none';
+                    clone.setAttribute('aria-hidden', 'true');
+                    const rect = piece.getBoundingClientRect();
+                    clone.style.width = rect.width + 'px';
+                    clone.style.height = rect.height + 'px';
+                    clone.style.left = e.clientX - rect.width / 2 + 'px';
+                    clone.style.top = e.clientY - rect.height / 2 + 'px';
+                    document.body.appendChild(clone);
+                });
+
+                document.addEventListener('pointermove', function (e) {
+                    if (!clone) return;
+                    e.preventDefault();
+                    clone.style.left = e.clientX - clone.offsetWidth / 2 + 'px';
+                    clone.style.top = e.clientY - clone.offsetHeight / 2 + 'px';
+                });
+
+                document.addEventListener('pointerup', function (e) {
+                    if (!clone || !currentPiece) return;
+
+                    const cells = document.querySelectorAll('.puzzle-cell');
+                    let targetCell = null;
+                    cells.forEach(cell => {
+                        const rect = cell.getBoundingClientRect();
+                        if (e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom) {
+                            targetCell = cell;
+                        }
+                    });
+
+                    if (targetCell) {
+                        const existingPiece = targetCell.querySelector('.puzzle-piece');
+                        if (existingPiece) {
+                            piecesContainer.appendChild(existingPiece);
+                        }
+                        targetCell.appendChild(currentPiece);
+                    } else {
+                        piecesContainer.appendChild(currentPiece);
+                    }
+
+                    document.body.removeChild(clone);
+                    currentPiece.style.opacity = '1';
+                    clone = null;
+                    currentPiece = null;
+
+                    checkWin();
+                });
+            }
+
+            function checkWin() {
+                const cells = document.querySelectorAll('.puzzle-cell');
+                let correct = 0;
+                cells.forEach(cell => {
+                    const piece = cell.querySelector('.puzzle-piece');
+                    if (piece && piece.dataset.index === cell.dataset.index) {
+                        correct++;
+                        piece.classList.add('correct');
+                    } else if (piece) {
+                        piece.classList.remove('correct');
+                    }
+                });
+
+                if (correct === totalPieces) {
+                    const levelName = levels[currentLevel].name;
+                    if (currentLevel + 1 < totalLevels) {
+                        messageDiv.innerHTML = `
+                            <span style="font-size: 1.2rem;">Поздравляем! Вы собрали пазл "${levelName}"!</span>
+                            <button id="nextLevelBtn" class="puzzle-btn">Следующий уровень →</button>
+                        `;
+                        const nextBtn = document.getElementById('nextLevelBtn');
+                        if (nextBtn) nextBtn.addEventListener('click', goToNextLevel);
+                    } else {
+                        messageDiv.innerHTML = `
+                            <span style="font-size: 1.3rem;">Поздравляем! Вы прошли все уровни!</span>
+                            <button id="restartAllBtn" class="puzzle-btn">Начать заново</button>
+                        `;
+                        const restartBtn = document.getElementById('restartAllBtn');
+                        if (restartBtn) restartBtn.addEventListener('click', restartAllLevels);
+                    }
+                }
+            }
+
+            function goToNextLevel() {
+                if (currentLevel + 1 < totalLevels) {
+                    currentLevel++;
+                    createPuzzle();
+                }
+            }
+
+            function restartAllLevels() {
+                currentLevel = 0;
+                createPuzzle();
+            }
+
+            shuffleBtn.addEventListener('click', () => {
+                resetAndShuffle();
+            });
+
+            createPuzzle();
+            initDragAndDrop();
+        })();
+    </script>
+</body>
+
+</html>

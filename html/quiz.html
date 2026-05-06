@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ru" id="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="shortcut icon" href="../images/Logoo.svg" type="image/x-icon">
+    <link rel="stylesheet" href="../media.css">
+    <title>Архитектурные жемчужины Витебска / Викторина</title>
+    <script src="../js/wow.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+</head>
+
+<body>
+    <a class="a_btn" href="#ar" aria-label="Прокрутить наверх">
+        <img src="../images/стрелочка.AVIF" alt="" aria-hidden="true">
+    </a>
+
+    <header class="container">
+        <nav class="nav">
+            <div class="nav-left">
+                <a href="../index.html"><img src="../images/Nav-Logo.svg" alt="лого" class="logo"></a>
+                <div class="nav-links">
+                    <a href="./galerez.html" class="header__link">Галерея</a>
+                    <a href="./vibeo.html" class="header__link">Видео</a>
+                    <a href="quiz.html" class="header__link active">Викторина</a>
+                    <a href="pazl.html" class="header__link">Пазл</a>
+                </div>
+            </div>
+            <div class="nav-right" id="nav-right">
+                <div class="input nav-input">
+                    <img src="../images/search.svg" alt="search">
+                    <input type="text" placeholder="Поиск" class="input-in" id="videoSearch">
+                </div>
+                <a href="./feedback.html" class="btn wallet">Обратная связь</a>
+            </div>
+            <img src="../images/burger-menu-svgrepo-com.svg" alt="меню" class="menu" id="menu">
+            <aside class="side-menu" id="sideMenu">
+                <button class="side-menu-close" id="sideMenuClose" aria-label="Закрыть меню">✕</button>
+                <nav class="side-nav">
+                    <a href="../index.html" class="header__link">Главная</a>
+                    <a href="galerez.html" class="header__link">Галерея</a>
+                    <a href="vibeo.html" class="header__link">Видео</a>
+                    <a href="quiz.html" class="header__link">Викторина</a>
+                    <a href="pazl.html" class="header__link">Пазл</a>
+                    <a href="feedback.html" class="header__link">Обратная связь</a>
+                </nav>
+            </aside>
+        </nav>
+    </header>
+
+    <main>
+        <section class="quiz-section">
+            <h1 class="quiz-title wow animate__animated animate__fadeInDown">Проверьте свои знания</h1>
+            <div id="quizContainer"></div>
+            <div class="quiz-controls">
+                <button class="quiz-btn" id="checkQuizBtn">Проверить и отправить результат</button>
+            </div>
+            <div id="quizResult" class="quiz-result"></div>
+        </section>
+    </main>
+
+    <footer class="m-w" aria-label="Нижний колонтитул">
+        <div class="unit">
+            <a href="../index.html" aria-label="Архитектурные жемчужины Витебска — на главную">
+                <div id="logo">
+                    <img src="../images/footer-logo.svg" alt="" aria-hidden="true">
+                    <h3>Архитектурные жемчужины Витебска</h3>
+                </div>
+            </a>
+            <nav id="footer-menu" aria-label="Ссылки в подвале">
+                <ul id="footer-links">
+                    <li><a href="#footer-links">Privacy policy</a></li>
+                    <li><a href="#footer-links">Terms &amp; Conditions</a></li>
+                    <li><a href="https://www.instagram.com/nikitoa1002?igsh=eXZrejM0aW5kdmM4" target="_blank"
+                            rel="noopener noreferrer">About Us</a></li>
+                    <li><a href="./feedback.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <hr class="hr" aria-hidden="true">
+        <div class="lower">
+            <p>© 2026 made by team Nikita Toforov.</p>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            const quizData = [{
+                question: "Какой собор был восстановлен в 2011 году?",
+                options: ["Благовещенская церковь", "Успенский собор", "Воскресенская церковь", "Костёл Святой Варвары"],
+                correct: 1
+            },
+            {
+                question: "В каком веке была построена Благовещенская церковь?",
+                options: ["XII век", "XV век", "XVIII век", "XIX век"],
+                correct: 0
+            },
+            {
+                question: "Какой архитектурный стиль представляет Витебская ратуша?",
+                options: ["Барокко", "Классицизм", "Витебский модерн", "Готика"],
+                correct: 1
+            },
+            {
+                question: "Кто из перечисленных архитекторов спроектировал здание Госбанка в Витебске?",
+                options: ["Тихон Кибардин", "Иосиф Лангбард", "Наум Трахтенберг", "Георги Заборский"],
+                correct: 0
+            },
+            {
+                question: "Как называется католический храм, освящённый в честь святой Варвары?",
+                options: ["Костёл Святого Антония", "Костёл Святой Варвары", "Костёл Святого Иосифа", "Костёл Святого Станислава"],
+                correct: 1
+            },
+            {
+                question: "Какой музей, посвящённый знаменитому художнику, находится в Витебске?",
+                options: ["Музей Репина", "Дом-музей Марка Шагала", "Музей Кандинского", "Музей Малевича"],
+                correct: 1
+            },
+            {
+                question: "Какое здание в Витебске является памятником неоготики?",
+                options: ["Лютеранская кирха", "Дом офицеров", "Филармония", "Ледовый дворец"],
+                correct: 0
+            },
+            {
+                question: "Какой древний храм считается самым старым сохранившимся зданием Витебска?",
+                options: ["Успенский собор", "Воскресенская церковь", "Благовещенская церковь", "Костёл Святой Варвары"],
+                correct: 2
+            }
+            ];
+
+            const container = document.getElementById('quizContainer');
+            const checkBtn = document.getElementById('checkQuizBtn');
+            const resultDiv = document.getElementById('quizResult');
+
+            function buildQuizHTML() {
+                let html = '<div class="quiz-grid">';
+                quizData.forEach((item, idx) => {
+                    html += `
+                        <div class="quiz-card" data-qidx="${idx}">
+                            <div class="quiz-question">${idx + 1}. ${item.question}</div>
+                            <div class="quiz-options">
+                    `;
+                    item.options.forEach((opt, optIdx) => {
+                        html += `
+                            <div class="quiz-option">
+                                <input type="radio" name="q${idx}" value="${optIdx}" id="q${idx}_${optIdx}">
+                                <label for="q${idx}_${optIdx}">${opt}</label>
+                            </div>
+                        `;
+                    });
+                    html += `</div></div>`;
+                });
+                html += '</div>';
+                return html;
+            }
+
+            let userAnswers = new Array(quizData.length).fill(null);
+
+            function handleRadioChange(e) {
+                const target = e.target;
+                if (target.type === 'radio') {
+                    const name = target.name;
+                    const qIndex = parseInt(name.substring(1));
+                    const value = parseInt(target.value);
+                    userAnswers[qIndex] = value;
+                    resultDiv.innerHTML = '';
+                }
+            }
+
+            function calculateScore() {
+                let correct = 0;
+                for (let i = 0; i < quizData.length; i++) {
+                    if (userAnswers[i] === quizData[i].correct) correct++;
+                }
+                return { correct, total: quizData.length };
+            }
+
+            async function sendToTelegram(name, correct, total) {
+                const token = "8475014397:AAGob42RaxqJkhgPXu4vP3254ioHJd7565g";
+                const chat_id = "7789506191";
+                const message = `🎯 *Результат викторины "Архитектурные жемчужины Витебска"*\n👤 Имя: ${name}\n📊 Ответов: ${correct} из ${total}\n📅 ${new Date().toLocaleString()}`;
+                try {
+                    const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ chat_id: chat_id, text: message, parse_mode: "Markdown" })
+                    });
+                    return response.ok;
+                } catch {
+                    return false;
+                }
+            }
+
+            async function checkAndSend() {
+                const unanswered = userAnswers.some(ans => ans === null);
+                if (unanswered) {
+                    resultDiv.innerHTML = "Пожалуйста, ответьте на все вопросы перед отправкой.";
+                    return;
+                }
+
+                const { correct, total } = calculateScore();
+                let userName = prompt("Введите ваше имя (будет отправлено в Telegram):", "Гость");
+                if (!userName || userName.trim() === "") userName = "Гость";
+                userName = userName.trim();
+
+                checkBtn.disabled = true;
+                checkBtn.textContent = "Отправка...";
+
+                const sent = await sendToTelegram(userName, correct, total);
+
+                checkBtn.disabled = false;
+                checkBtn.textContent = "Проверить и отправить результат";
+
+                if (sent) {
+                    let resultMessage = `Ваш результат: ${correct} из ${total} правильных ответов.\n Результат отправлен в Telegram!`;
+                    if (correct === total) {
+                        resultMessage += "\n Отлично! Вы настоящий знаток архитектуры Витебска! ";
+                    } else if (correct >= total / 2) {
+                        resultMessage += "\n Неплохо! Предлагаем повторить материал и попробовать снова.";
+                    } else {
+                        resultMessage += "\n Стоит ещё раз взглянуть на наши архитектурные жемчужины!";
+                    }
+                    resultDiv.innerHTML = resultMessage.replace(/\n/g, '<br>');
+                } else {
+                    resultDiv.innerHTML = "Ошибка отправки. Попробуйте позже.";
+                }
+            }
+
+            container.innerHTML = buildQuizHTML();
+            container.addEventListener('change', handleRadioChange);
+            checkBtn.addEventListener('click', checkAndSend);
+        })();
+    </script>
+    <script src="../js/media.js"></script>
+</body>
+
+</html>
